@@ -44,13 +44,14 @@ def main(turn_num):
   curPlayer = turn_num % num_players
   model_name = "./splendor/pretrained_%dplayers.pt" % num_players
   game = Game(num_players)
+  canonical_board = game.getCanonicalForm(board, curPlayer)
 
   game.printBoard(board)
   print(f"Player {curPlayer} 's. turn ...")
 
   for n in [100, 1000, 1600, 3000, 10000, 100000, 500000]:
     print("Num of MCTS: ", n)
-    review(board, game, curPlayer, model_name, num_mcts=n, temp=1)
+    review(canonical_board, game, curPlayer, model_name, num_mcts=n, temp=1)
   
   
 
